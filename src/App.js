@@ -5,6 +5,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Main from './layout/Main';
 import Login from './Pages/Login/Login/Login';
 import Blog from './Pages/Blog/Blog';
+import Course from './Pages/Course/Course';
 // import { routes } from './Routes/Routes/Routes';
 
 
@@ -20,6 +21,10 @@ function App() {
       {
         path: '/blog',
         element: <Blog></Blog>
+      },
+      {
+        path: '/course/:id',
+        element: <Course></Course>
       }
     ]
   }])
