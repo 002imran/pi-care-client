@@ -6,6 +6,7 @@ import Main from './layout/Main';
 import Login from './Pages/Login/Login/Login';
 import Blog from './Pages/Blog/Blog';
 import Course from './Pages/Course/Course';
+import Registration from './Pages/Login/Registration/Registration';
 // import { routes } from './Routes/Routes/Routes';
 
 
@@ -17,6 +18,10 @@ function App() {
       {
         path: "/login",
         element: <Login></Login>
+      },
+      {
+        path: '/registration',
+        element: <Registration></Registration>
       },
       {
         path: '/blog',
