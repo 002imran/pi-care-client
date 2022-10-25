@@ -11,18 +11,18 @@ const Main = () => {
         <Header></Header>
         {/* <Outlet></Outlet> */}
 
-        <Container>
+        {/* <Container> */}
           <Row>
-            <Col lg="4">
+            <Col lg="2">
               <LeftSideNav></LeftSideNav>
             </Col>
-            <Col lg="8">
+            <Col lg="10">
               <Outlet>
                 <h2>Mian part</h2>{" "}
               </Outlet>
             </Col>
           </Row>
-        </Container>
+        {/* </Container> */}
 
         <Footer></Footer>
       </div>
