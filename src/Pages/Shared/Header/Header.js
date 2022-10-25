@@ -2,6 +2,7 @@ import React from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/picare-logo.png'
 
 const Header = () => {
@@ -28,15 +29,25 @@ const Header = () => {
             id="responsive-navbar-nav"
             className="fs-5 ms-4 ps-4"
           >
-            <Nav className="me-auto">
-              <Nav.Link to="/courses">Courses</Nav.Link>
-              <Nav.Link href="/blog">Blog</Nav.Link>
+            <Nav className="me-auto gap-4">
+              <Link to="/courses" className="text-decoration-none text-white">
+                Courses
+              </Link>
+              <Link to="/blog" className="text-decoration-none text-white">
+                Blog
+              </Link>
             </Nav>
-            <Nav>
-              <Nav.Link href="/faq">FAQ</Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
-                Profile
-              </Nav.Link>
+            <Nav className='gap-4'>
+              <Link to="/faq" className="text-decoration-none text-white">
+                FAQ?
+              </Link>
+              <Link
+                eventKey={2}
+                to="/login"
+                className="text-decoration-none text-white"
+              >
+                Login
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
