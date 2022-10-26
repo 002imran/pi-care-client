@@ -1,187 +1,85 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import Button from "react-bootstrap/Button";
-
-
-// const Login = () => {
-
-//   const handleSubmit =(e) =>{
-//     e.preventDefault();
-//     console.log(e.target.email.value);
-//   }
-//    return (
-//      <div className="mt-5 me-5">
-//        <section className="vh-100" style={{ "background-color": "#eee" }}>
-//          <div className="container h-100">
-//            <div className="row d-flex justify-content-center align-items-center h-100">
-//              <div className="col-lg-12 col-xl-11">
-//                <div
-//                  className="card text-black"
-//                  style={{ "border-radius": "25px" }}
-//                >
-//                  <div className="card-body p-md-5">
-//                    <div className="row justify-content-center">
-//                      <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-//                        <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-//                          Log In
-//                        </p>
-
-//                        <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
-//                          <div className="d-flex flex-row align-items-center mb-4">
-//                            <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-//                          </div>
-
-//                          <div className="d-flex flex-row align-items-center mb-4">
-//                            <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-//                            <div className="form-outline flex-fill mb-0">
-//                              <input
-//                                type="email"
-//                                id="form3Example3c"
-//                                className="form-control"
-//                                name='email'
-//                              />
-//                              <label className="form-label" for="form3Example3c">
-//                                Your Email
-//                              </label>
-//                            </div>
-//                          </div>
-
-//                          <div className="d-flex flex-row align-items-center mb-4">
-//                            <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-//                            <div className="form-outline flex-fill mb-0">
-//                              <input
-//                                type="password"
-//                                id="form3Example4c"
-//                                className="form-control"
-//                              />
-//                              <label className="form-label" for="form3Example4c">
-//                                Password
-//                              </label>
-//                            </div>
-//                          </div>
-
-//                          <div className="d-flex justify-content-center ms-3 mb-3 mb-lg-4">
-//                            <Button
-//                              type="button"
-//                              className="btn btn-primary btn-lg w-100"
-//                            >
-//                              LogIn
-//                            </Button>
-//                          </div>
-//                          <div className="form-check d-flex justify-content-center mb-5">
-//                            <label
-//                              className="form-check-label"
-//                              for="form2Example3"
-//                            >
-//                              Don't have an Account{" "}
-//                              <Link to="/registration">
-//                                Please Registration Here
-//                              </Link>
-//                            </label>
-//                          </div>
-//                        </form>
-//                      </div>
-//                      <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-//                        <img
-//                          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-//                          className="img-fluid"
-//                          alt="Sample image"
-//                        />
-//                      </div>
-//                    </div>
-//                  </div>
-//                </div>
-//              </div>
-//            </div>
-//          </div>
-//        </section>
-//      </div>
-//    );
-// };
-
-// export default Login;
-
-
-
-
-
-
-
-
-
-
-
 import { GoogleAuthProvider } from "firebase/auth";
-import React from "react";
-import { useContext } from "react";
-import { Button } from "react-bootstrap";
-// import { useState } from "react";
-import { BiLogInCircle } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { SiGnuprivacyguard } from "react-icons/si";
+import React, { useContext, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { BsGithub, BsGoogle } from "react-icons/bs";
+import { Link, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
-import "../Registration/Registration.css";
+
 
 const Login = () => {
+    const { signIn, providerLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const googleProvider = new GoogleAuthProvider();
 
-  const { user, providerLogin } = useContext(AuthContext);
-  const googleProvider = new GoogleAuthProvider();
+    const handleGoogleSignIn =()=>{
+      providerLogin(googleProvider)
+      .then(result =>{
+        const user = result.user;
+        console.log(user);
+      
+      })
+      .catch(error => console.error(error))
+    }
 
-  const handleGoogleSignIn =()=>{
-    providerLogin(googleProvider)
-    .then(result =>{
-      const user = result.user;
-      console.log(user);
-    })
-    .catch(error => console.error(error))
-  }
+    const handleSubmit = event =>{
+      event.preventDefault();
+      const form = event.target;
+      const email = form.email.value;
+
+      const password = form.password.value;
+      signIn(email, password)
+      .then(result =>{
+        const user = result.user;
+        console.log(user);
+        form.reset();
+        navigate('/')
+      })
+      .catch(error => console.error(error))
+    }
 
 
-  // const [userInfo, setUserInfo] = useState({
-  //   email: "",
-  //   password: ""
-  // });
-
-  // const [errors, setErrors] = useState('')
-
-
-  // const handleSubmit = (e) =>{
-  //   e.preventDefault();
-  //   const email = e.target.email.value;
-  //   const password = e.target.password.value;
-  // }
-
-  // const handleEmailChange = (e) =>{
-  //   setUserInfo({...userInfo, email: e.target.value});
-  // }
-
-  // const handlePasswordChange = (e) =>{
-  //   const password = e.target.value;
-  //   if(password.length < 6){
-  //     setErrors("Must be 6 characters")
-  //   }
-  //   setUserInfo({...userInfo, password: e.target.value});
-  // }
   return (
-    <div className="d-flex w-75 ms-5">
-      <div className="login-container">
-        <div className="login-title">
-          Login
-          <BiLogInCircle />
-        </div>
-        <form className="login-form">
-          <input type="text" placeholder="Your Email" name="email" />
-          <input type="password" placeholder="password" name="password" />
+    <div className="d-flex flex-row-reverse m-5">
+      <>
+        <Form className="w-25 m-5" onSubmit={handleSubmit}>
+          <h2 className="text-center mb-3 text-primary">Log In <SiGnuprivacyguard/></h2>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="enter your email"
+              required
+            />
+          </Form.Group>
 
-          <button>Login</button>
-          
-
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
+          </Form.Group>
           <p>
-            Don't have an account? <Link to="/registration">Sign up first</Link>
+            Donn't have an account{" "}
+            <Link to="/registration">registration here</Link>
           </p>
-        </form>
+          <div className="d-flex gap-4 text-center align-items-center fs-3">
+            <Button variant="primary" type="submit" className="w-50">
+              Login
+            </Button>
+            <BsGoogle title="Google" onClick={handleGoogleSignIn} />
+            <BsGithub title="Github" />
+          </div>
 
-        <Button onClick={handleGoogleSignIn}>Google</Button>
-      </div>
+          {/* <Form.Text className="text-danger">{error}</Form.Text> */}
+        </Form>
+      </>
+
       <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
         <img
           src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"

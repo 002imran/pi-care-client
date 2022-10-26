@@ -1,167 +1,111 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import Button from "react-bootstrap/Button";
-
-
-
-// const Registration = () => {
-
-//   const handleSubmit = (e) =>{
-//     e.preventDefault();
-//     console.log(e.target.email.value);
-//   }
-//   return (
-//     <div className="mt-5 me-5">
-//       <section className="vh-100" >
-//         <div className="container h-100">
-//           <div className="row d-flex justify-content-center align-items-center h-100">
-//             <div className="col-lg-12 col-xl-11">
-//               <div
-//                 className="card text-black"
-//                 style={{ "border-radius": "25px" }}
-//               >
-//                 <div className="card-body p-md-5">
-//                   <div className="row justify-content-center">
-//                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-//                       <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-//                         Sign up
-//                       </p>
-
-//                       <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
-//                         <div className="d-flex flex-row align-items-center mb-4">
-//                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-//                           <div className="form-outline flex-fill mb-0">
-//                             <input
-//                               type="text"
-//                               id="form3Example1c"
-//                               className="form-control"
-//                             />
-//                             <label className="form-label" for="form3Example1c">
-//                               Your Name
-//                             </label>
-//                           </div>
-//                         </div>
-
-//                         <div className="d-flex flex-row align-items-center mb-4">
-//                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-//                           <div className="form-outline flex-fill mb-0">
-//                             <input
-//                               type="email"
-//                               id="form3Example3c"
-//                               className="form-control"
-//                               name="email"
-//                             />
-//                             <label className="form-label" for="form3Example3c">
-//                               Your Email
-//                             </label>
-//                           </div>
-//                         </div>
-
-//                         <div className="d-flex flex-row align-items-center mb-4">
-//                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-//                           <div className="form-outline flex-fill mb-0">
-//                             <input
-//                               type="password"
-//                               id="form3Example4c"
-//                               className="form-control"
-//                             />
-//                             <label className="form-label" for="form3Example4c">
-//                               Password
-//                             </label>
-//                           </div>
-//                         </div>
-
-//                         <div className="d-flex flex-row align-items-center mb-4">
-//                           <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-//                           <div className="form-outline flex-fill mb-0">
-//                             <input
-//                               type="password"
-//                               id="form3Example4cd"
-//                               className="form-control"
-//                             />
-//                             <label className="form-label" for="form3Example4cd">
-//                               Repeat your password
-//                             </label>
-//                           </div>
-//                         </div>
-
-//                         <div className="form-check d-flex justify-content-center mb-5">
-//                           <input
-//                             className="form-check-input me-2"
-//                             type="checkbox"
-//                             value=""
-//                             id="form2Example3c"
-//                           />
-//                           <label
-//                             className="form-check-label"
-//                             for="form2Example3"
-//                           >
-//                             I agree all statements in{" "}
-//                             <a href="#!">Terms of service</a>
-//                           </label>
-//                         </div>
-
-//                         <div className="d-flex justify-content-center ms-3 mb-3 mb-lg-4">
-//                           <Button
-//                             type="button"
-//                             className="btn btn-primary btn-lg w-100"
-//                           >
-//                             Register
-//                           </Button>
-//                         </div>
-//                         <label className="form-check-label ps-3" for="form2Example3">
-//                           Already Have an Account{" "}
-//                           <Link to="/login">
-//                             Please Login
-//                           </Link>
-//                         </label>
-//                       </form>
-//                     </div>
-//                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-//                       <img
-//                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-//                         className="img-fluid"
-//                         alt="Sample image"
-//                       />
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default Registration;
-
-
-
-
-
-
-
 import { SiGnuprivacyguard } from "react-icons/si";
-import "./Registration.css";
-
+// import "./Registration.css";
+import { Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
+import { useState } from "react";
 const Registration = () => {
+
+     const {createUser} = useContext(AuthContext);
+     const [error, setError] = useState('');
+
+     const handleSubmit = (event) =>{
+         event.preventDefault();
+         const form = event.target;
+         const name = form.name.value;
+         const email = form.email.value;
+         const photoURL = form.photoURL.value;
+         const password = form.password.value
+         const confirm = form.confirmPassword.value;
+         console.log(name, email, photoURL, password, confirm);
+
+         createUser(email, password)
+         .then(result => {
+            const user = result.user;
+            setError('');
+            console.log(user);
+         })
+         .catch(e=> {
+          console.error(e);
+          setError(e.message);
+         });
+
+
+     }
+
      return (
-       <div className="d-flex w-75 ms-5">
-         <div className="login-container">
-           <div className="login-title">
-             Sign up <SiGnuprivacyguard />
-           </div>
-           <form className="login-form">
-             <input type="text" placeholder="Your Email" />
-             <input placeholder="password" />
+       <div className="d-flex flex-row-reverse m-5">
+         <>
+           <Form className="w-25 m-5" onSubmit={handleSubmit}>
+             <h2 className="text-center mb-3 text-primary">
+               Sign Up <SiGnuprivacyguard />{" "}
+             </h2>
+             <Form.Group className="mb-3" controlId="formBasicEmail">
+               <Form.Label>Name</Form.Label>
+               <Form.Control
+                 name="name"
+                 type="text"
+                 placeholder="Give you name"
+                 required
+               />
+             </Form.Group>
 
-             <input type="password" placeholder="confirm password" />
+             <Form.Group className="mb-3" controlId="formBasicEmail">
+               <Form.Label>Email</Form.Label>
+               <Form.Control
+                 name="email"
+                 type="email"
+                 placeholder="enter your email"
+                 required
+               />
+             </Form.Group>
 
-             <button>Sign up</button>
-           </form>
-         </div>
+      
+             <Form.Group className="mb-3" controlId="formBasicEmail">
+               <Form.Label>Photo URL</Form.Label>
+               <Form.Control
+                 name="photoURL"
+                 type="text"
+                 placeholder="Photo URL"
+                 required
+               />
+             </Form.Group>
+
+             <Form.Group className="mb-3" controlId="formBasicPassword">
+               <Form.Label>Password</Form.Label>
+               <Form.Control
+                 name="password"
+                 type="password"
+                 placeholder="Password"
+                 required
+               />
+             </Form.Group>
+
+             <Form.Group className="mb-3" controlId="formBasicPassword">
+               <Form.Label>Confirm Password</Form.Label>
+               <Form.Control
+                 name="confirmPassword"
+                 type="password"
+                 placeholder="Confirm Password"
+                 required
+               />
+             </Form.Group>
+
+             <p>
+               Already Have an account <Link to="/login">Login</Link>
+             </p>
+             <div className="d-flex gap-4 text-center align-items-center fs-3">
+               <Button variant="primary" type="submit" className="w-50">
+                 Registration
+               </Button>
+             </div>
+
+             <Form.Text className="text-danger">{error}</Form.Text>
+           </Form>
+         </>
+
          <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
            <img
              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"

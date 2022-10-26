@@ -6,12 +6,13 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/picare-logo.png'
 import { AuthContext } from '../../../context/AuthProvider';
-import { Image } from "react-bootstrap";
+import { Image, Button } from "react-bootstrap";
 import { FaUser } from "react-icons/fa";
 import { useState } from 'react';
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+
     const [isHovering, setIsHovering] = useState(false);
     console.log('user header', user);
      const handleMouseOver = () => {
@@ -21,6 +22,12 @@ const Header = () => {
      const handleMouseOut = () => {
        setIsHovering(false);
      };
+
+     const handleLogOut = () =>{
+        logOut()
+        .then(()=>{})
+        .catch( error => console.error(error))
+     }
 
     return (
       <Navbar
@@ -58,7 +65,7 @@ const Header = () => {
               </Link>
             </Nav>
 
-            <div className='me-4'>
+            <div className="me-4">
               <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                 {user?.photoURL ? (
                   <>
@@ -76,7 +83,10 @@ const Header = () => {
               {isHovering && (
                 <h5
                   className="text-white text-sm-end fs-6 hover-overlay h-25 position-fixed"
-                  style={{ "background-color": "rgba(251, 251, 251, 0.2)", "transform":'translate(0)' }}
+                  style={{
+                    "background-color": "rgba(251, 251, 251, 0.2)",
+                    transform: "translate(0)",
+                  }}
                 >
                   {user?.displayName}
                 </h5>
@@ -85,14 +95,28 @@ const Header = () => {
 
             <Nav className="gap-4">
               <Link to="/faq" className="text-decoration-none text-white">
-                FAQ?
+                Faq?
               </Link>
               <Link
                 // eventKey={2}
                 to="/login"
                 className="text-decoration-none text-white"
               >
-                Login
+                {user ? (
+                  <>
+                    <button
+                      className="text-decoration-none text-white bg-dark border-0"
+                      onClick={handleLogOut}
+                    >
+                      Log out
+                    </button>
+                  </>
+                ) : (
+                  <Link to="/login" className="text-decoration-none text-white">
+                    Login
+                  </Link>
+                )}
+                {/* Login */}
               </Link>
             </Nav>
           </Navbar.Collapse>
