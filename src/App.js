@@ -8,6 +8,8 @@ import Blog from './Pages/Blog/Blog';
 import Course from './Pages/Course/Course';
 import Registration from './Pages/Login/Registration/Registration';
 import Home from './Pages/Home/Home';
+import Faq from './Pages/Faq/Faq';
+import PrivateRoute from './Routes/Routes/PrivateRoute';
 // import { routes } from './Routes/Routes/Routes';
 
 
@@ -20,7 +22,7 @@ function App() {
         {
           path: "/",
           element: <Home></Home>,
-          loader: () => fetch("http://localhost:5000/course-details")
+          loader: () => fetch("http://localhost:5000/course-details"),
         },
         {
           path: "/login",
@@ -35,10 +37,18 @@ function App() {
           element: <Blog></Blog>,
         },
         {
+          path: "/faq",
+          element: (
+            <PrivateRoute>
+              <Faq></Faq>
+            </PrivateRoute>
+          ),
+        },
+        {
           path: "/course/:id",
           element: <Course></Course>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/course/${params.id}`)
+            fetch(`http://localhost:5000/course/${params.id}`),
         },
       ],
     },

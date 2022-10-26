@@ -1,5 +1,4 @@
 import { SiGnuprivacyguard } from "react-icons/si";
-// import "./Registration.css";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
@@ -8,24 +7,28 @@ import { AuthContext } from "../../../context/AuthProvider";
 import { useState } from "react";
 const Registration = () => {
 
-     const {createUser} = useContext(AuthContext);
+     const { createUser, updateUserProfile } = useContext(AuthContext);
      const [error, setError] = useState('');
 
      const handleSubmit = (event) =>{
          event.preventDefault();
-         const form = event.target;
-         const name = form.name.value;
-         const email = form.email.value;
-         const photoURL = form.photoURL.value;
-         const password = form.password.value
-         const confirm = form.confirmPassword.value;
-         console.log(name, email, photoURL, password, confirm);
+         
+           const form = event.target;
+           const name = form.name.value;
+           const email = form.email.value;
+           const photoURL = form.photoURL.value;
+           const password = form.password.value
+           const confirm = form.confirmPassword.value;
+           console.log(name, email, photoURL, password, confirm);
+         
 
          createUser(email, password)
          .then(result => {
             const user = result.user;
-            setError('');
             console.log(user);
+            setError('');
+            form.reset();
+            handleUpdateUserProfile(name, photoURL);
          })
          .catch(e=> {
           console.error(e);
@@ -34,6 +37,15 @@ const Registration = () => {
 
 
      }
+     const handleUpdateUserProfile = (name, photoURL) => {
+       const profile = {
+         displayName: name,
+         photoURL: photoURL,
+       };
+       updateUserProfile(profile)
+         .then(() => {})
+         .catch((error) => console.error(error));
+     };
 
      return (
        <div className="d-flex flex-row-reverse m-5">
@@ -118,6 +130,14 @@ const Registration = () => {
 };
 
 export default Registration;
+
+
+
+
+
+
+
+
 
 
 

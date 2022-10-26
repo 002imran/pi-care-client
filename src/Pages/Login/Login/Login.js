@@ -1,27 +1,42 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { SiGnuprivacyguard } from "react-icons/si";
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { BsGithub, BsGoogle } from "react-icons/bs";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import { useState } from "react";
 
 
 const Login = () => {
     const { signIn, providerLogin } = useContext(AuthContext);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleGoogleSignIn =()=>{
       providerLogin(googleProvider)
       .then(result =>{
         const user = result.user;
         console.log(user);
-      
       })
       .catch(error => console.error(error))
     }
+
+    const handleGithubSignIn = () => {
+       providerLogin(githubProvider)
+        .then((result) => {
+          const user = result.user;
+           console.log(user);
+        })
+        .catch(error => console.error('error:', error))
+    };
 
     const handleSubmit = event =>{
       event.preventDefault();
@@ -34,9 +49,14 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         form.reset();
-        navigate('/')
+        setError('');
+        navigate(from, {replace: true})
       })
-      .catch(error => console.error(error))
+      .catch(error =>{
+       console.error(error)
+       setError(error.message);
+      })
+      
     }
 
 
@@ -44,7 +64,9 @@ const Login = () => {
     <div className="d-flex flex-row-reverse m-5">
       <>
         <Form className="w-25 m-5" onSubmit={handleSubmit}>
-          <h2 className="text-center mb-3 text-primary">Log In <SiGnuprivacyguard/></h2>
+          <h2 className="text-center mb-3 text-primary">
+            Log In <SiGnuprivacyguard />
+          </h2>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -73,10 +95,10 @@ const Login = () => {
               Login
             </Button>
             <BsGoogle title="Google" onClick={handleGoogleSignIn} />
-            <BsGithub title="Github" />
+            <BsGithub title="Github" onClick={handleGithubSignIn} />
           </div>
 
-          {/* <Form.Text className="text-danger">{error}</Form.Text> */}
+          <Form.Text className="text-danger">{error}</Form.Text>
         </Form>
       </>
 
