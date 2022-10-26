@@ -5,11 +5,11 @@ import Button from "react-bootstrap/Button";
 const LeftSideNav = () => {
     const [courses, setCourses] = useState([]);
 
-    useEffect(() => {
-      fetch("http://localhost:5000/course-list")
-        .then((res) => res.json())
-        .then((data) => setCourses(data));
-    });
+    // useEffect(() => {
+    //   fetch("http://localhost:5000/course-list")
+    //     .then((res) => res.json())
+    //     .then((data) => setCourses(data));
+    // });
     return (
       <div className="bg-black m-1 rounded-bottom rounded-4 text-center">
         <h2 className='pt-5 text-white'>Our Courses</h2>

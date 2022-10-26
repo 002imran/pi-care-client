@@ -1,11 +1,27 @@
 import React from 'react';
+import { useContext } from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/picare-logo.png'
+import { AuthContext } from '../../../context/AuthProvider';
+import { Image } from "react-bootstrap";
+import { FaUser } from "react-icons/fa";
+import { useState } from 'react';
 
 const Header = () => {
+    const { user } = useContext(AuthContext);
+    const [isHovering, setIsHovering] = useState(false);
+    console.log('user header', user);
+     const handleMouseOver = () => {
+       setIsHovering(true);
+     };
+
+     const handleMouseOut = () => {
+       setIsHovering(false);
+     };
+
     return (
       <Navbar
         collapseOnSelect
@@ -24,7 +40,9 @@ const Header = () => {
         </Link>
         <Container>
           <Navbar.Brand className="fs-2">
-            <Link to="/" className='text-decoration-none text-white'>PI-Care</Link>
+            <Link to="/" className="text-decoration-none text-white">
+              PI-Care
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse
@@ -39,6 +57,32 @@ const Header = () => {
                 Blog
               </Link>
             </Nav>
+
+            <div className='me-4'>
+              <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                {user?.photoURL ? (
+                  <>
+                    <Image
+                      style={{ height: "30px" }}
+                      roundedCircle
+                      src={user?.photoURL}
+                    ></Image>
+                  </>
+                ) : (
+                  <FaUser></FaUser>
+                )}
+              </div>
+
+              {isHovering && (
+                <h5
+                  className="text-white text-sm-end fs-6 hover-overlay h-25 position-fixed"
+                  style={{ "background-color": "rgba(251, 251, 251, 0.2)", "transform":'translate(0)' }}
+                >
+                  {user?.displayName}
+                </h5>
+              )}
+            </div>
+
             <Nav className="gap-4">
               <Link to="/faq" className="text-decoration-none text-white">
                 FAQ?
