@@ -12,16 +12,15 @@ const Main = () => {
         {/* <Outlet></Outlet> */}
 
         {/* <Container> */}
-          <Row>
-            <Col lg="2">
-              <LeftSideNav></LeftSideNav>
-            </Col>
-            <Col lg="10">
+        <Row>
+          <Col lg="2">
+            <LeftSideNav></LeftSideNav>
+          </Col>
+          <Col lg="10">
               <Outlet>
-                <h2>Mian part</h2>{" "}
-              </Outlet>
-            </Col>
-          </Row>
+               </Outlet>
+         </Col>
+        </Row>
         {/* </Container> */}
 
         <Footer></Footer>
