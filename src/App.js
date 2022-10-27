@@ -10,8 +10,9 @@ import Registration from './Pages/Login/Registration/Registration';
 import Home from './Pages/Home/Home';
 import Faq from './Pages/Faq/Faq';
 import PrivateRoute from './Routes/Routes/PrivateRoute';
-// import ErrorPage from './Pages/Error/ErrorPage';
+import ErrorPage from './Pages/Error/ErrorPage';
 import CourseNews from './CourseNews/CourseNews';
+import Checkout from './Pages/Checkout/Checkout';
 // import { routes } from './Routes/Routes/Routes';
 
 
@@ -20,7 +21,7 @@ function App() {
     {
       path: "/",
       element: <Main></Main>,
-      // errorElement: <ErrorPage />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -41,9 +42,14 @@ function App() {
         },
         {
           path: "/faq",
+          element: <Faq></Faq>
+          
+        },
+        {
+          path: "/checkout",
           element: (
             <PrivateRoute>
-              <Faq></Faq>
+              <Checkout></Checkout>
             </PrivateRoute>
           ),
         },

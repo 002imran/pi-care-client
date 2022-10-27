@@ -29,10 +29,8 @@ import CourseDetailsCard from '../Shared/CourseDetailsCard/CourseDetailsCard';
 
 const Home = () => {
     const allCourses = useLoaderData();
-    console.log('al courses from home', allCourses);
-    return (
+     return (
       <div>
-        <h2>This is Home Components: {allCourses.length}</h2>
         {allCourses.map((courses) => (
           <CourseDetailsCard key={courses.id} courses={courses}></CourseDetailsCard>
         ))}

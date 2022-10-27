@@ -6,11 +6,7 @@ const Course = () => {
     console.log(courseItems);
     const {title,img, body} = courseItems;
     return (
-      // <div>
-      //     <h2>Our Current Courses: {courseItems.img}</h2>
-      //     <img src={courseItems.img} alt=' '/>
-      // </div>
-
+    
       <div className="row row-cols-1 row-cols-md-12 row-cols-lg-12 g-3 pb-3 mt-5 container">
         <div className="col">
           <div className="card gap-2 me-5">
@@ -23,16 +19,7 @@ const Course = () => {
             />
             <div className="card-body">
               {body}
-              {/* <p className="card-text">
-                  {body.length > 250 ? 
-              <>
-                {body.slice(0, 20) + "..."}{" "}
-                <Link to={`/course-news/${id}`}>Read More</Link>
-              </>
-             : 
-              body
-            }
-              </p> */}
+            
             </div>
           </div>
         </div>

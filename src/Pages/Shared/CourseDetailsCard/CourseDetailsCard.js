@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Pdf from "react-to-pdf";
 import './CourseDetailsCard.css';
@@ -10,7 +11,7 @@ const CourseDetailsCard = ({courses}) => {
       <div className="row row-cols-1 row-cols-md-12 row-cols-lg-12 g-3 pb-3 container mt-5">
         <div className="col">
           <div className="card gap-2 me-5">
-            <div className='d-flex align-items-center justify-content-center'>
+            <div className="d-flex align-items-center justify-content-center">
               <h5 className="card-title text-center my-3 fs-3">{title}</h5>
               <Pdf targetRef={ref} filename="code-example.pdf">
                 {({ toPdf }) => (
@@ -28,6 +29,14 @@ const CourseDetailsCard = ({courses}) => {
             />
             <div className="card-body" ref={ref}>
               {body}
+              <Button className="w-25 d-flex justify-content-center mt-2">
+                <Link
+                  to={`/checkout`}
+                  className="text-decoration-none text-white"
+                >
+                  Premium
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

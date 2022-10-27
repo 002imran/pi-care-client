@@ -14,8 +14,7 @@ const Header = () => {
     const { user, logOut } = useContext(AuthContext);
 
     const [isHovering, setIsHovering] = useState(false);
-    console.log('user header', user);
-     const handleMouseOver = () => {
+    const handleMouseOver = () => {
        setIsHovering(true);
      };
 
@@ -84,7 +83,6 @@ const Header = () => {
                 <h5
                   className="text-white text-sm-end fs-6 hover-overlay h-25 position-fixed"
                   style={{
-                    "background-color": "rgba(251, 251, 251, 0.2)",
                     transform: "translate(0)",
                   }}
                 >
@@ -98,7 +96,6 @@ const Header = () => {
                 Faq?
               </Link>
               <Link
-                // eventKey={2}
                 to="/login"
                 className="text-decoration-none text-white"
               >
@@ -116,9 +113,9 @@ const Header = () => {
                     Login
                   </Link>
                 )}
-                {/* Login */}
               </Link>
             </Nav>
+            
           </Navbar.Collapse>
         </Container>
 
