@@ -10,7 +10,8 @@ import Registration from './Pages/Login/Registration/Registration';
 import Home from './Pages/Home/Home';
 import Faq from './Pages/Faq/Faq';
 import PrivateRoute from './Routes/Routes/PrivateRoute';
-import ErrorPage from './Pages/Error/ErrorPage';
+// import ErrorPage from './Pages/Error/ErrorPage';
+import CourseNews from './CourseNews/CourseNews';
 // import { routes } from './Routes/Routes/Routes';
 
 
@@ -19,12 +20,12 @@ function App() {
     {
       path: "/",
       element: <Main></Main>,
-      errorElement: <ErrorPage />,
+      // errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
           element: <Home></Home>,
-          loader: () => fetch("http://localhost:5000/course-details"),
+          loader: () => fetch("http://localhost:5000/course-news"),
         },
         {
           path: "/login",
@@ -51,6 +52,12 @@ function App() {
           element: <Course></Course>,
           loader: ({ params }) =>
             fetch(`http://localhost:5000/course/${params.id}`),
+        },
+        {
+          path: "/details/:id",
+          element: <CourseNews></CourseNews>,
+          loader: ({ params }) =>
+            fetch(`http://localhost:5000/course-news/${params.id}`),
         },
       ],
     },

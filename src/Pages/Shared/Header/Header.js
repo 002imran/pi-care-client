@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/picare-logo.png'
 import { AuthContext } from '../../../context/AuthProvider';
-import { Image, Button } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { FaUser } from "react-icons/fa";
 import { useState } from 'react';
 
