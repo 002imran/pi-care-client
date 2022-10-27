@@ -16,7 +16,7 @@ const CourseDetailsCard = ({courses}) => {
               <Pdf targetRef={ref} filename="code-example.pdf">
                 {({ toPdf }) => (
                   <button onClick={toPdf} className="ms-5 w-25 border-0">
-                    Download PDf
+                    Download Pdf
                   </button>
                 )}
               </Pdf>

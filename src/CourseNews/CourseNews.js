@@ -11,12 +11,7 @@ const CourseNews = () => {
             <h5 className="card-title text-center my-3 fs-3">
               {title}
             </h5>
-            {/* <img
-              src={courses.img}
-              className="card-img-top"
-              style={{ height: "50vh" }}
-              alt="..."
-            /> */}
+          
             <div className="card-body">
               <p className="card-text">
                  {details}

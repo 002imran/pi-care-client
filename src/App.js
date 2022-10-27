@@ -26,7 +26,7 @@ function App() {
         {
           path: "/",
           element: <Home></Home>,
-          loader: () => fetch("http://localhost:5000/course-news"),
+          loader: () => fetch("https://picare-server-site.vercel.app/course-news"),
         },
         {
           path: "/login",
@@ -57,13 +57,13 @@ function App() {
           path: "/course/:id",
           element: <Course></Course>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/course/${params.id}`),
+            fetch(`https://picare-server-site.vercel.app/course/${params.id}`),
         },
         {
           path: "/details/:id",
           element: <CourseNews></CourseNews>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/course-news/${params.id}`),
+            fetch(`https://picare-server-site.vercel.app/course-news/${params.id}`),
         },
       ],
     },
