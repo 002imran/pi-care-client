@@ -13,13 +13,15 @@ const Main = () => {
 
         {/* <Container> */}
         <Row>
-          <Col lg="2">
+          
+          <Col lg="8">
+            <Container className='ms-5'>
+                <Outlet></Outlet>
+            </Container>
+          </Col>
+          <Col lg="4">
             <LeftSideNav></LeftSideNav>
           </Col>
-          <Col lg="10">
-              <Outlet>
-               </Outlet>
-         </Col>
         </Row>
         {/* </Container> */}
 

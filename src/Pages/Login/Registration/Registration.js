@@ -48,9 +48,9 @@ const Registration = () => {
      };
 
      return (
-       <div className="d-flex flex-row-reverse m-5">
+       <div className="d-flex flex-column-reverse flex-md-row-reverse m-5 me-sm-5">
          <>
-           <Form className="w-25 m-5" onSubmit={handleSubmit}>
+           <Form className="w-100 me-5" onSubmit={handleSubmit}>
              <h2 className="text-center mb-3 text-primary">
                Sign Up <SiGnuprivacyguard />{" "}
              </h2>
@@ -74,7 +74,6 @@ const Registration = () => {
                />
              </Form.Group>
 
-      
              <Form.Group className="mb-3" controlId="formBasicEmail">
                <Form.Label>Photo URL</Form.Label>
                <Form.Control

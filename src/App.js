@@ -10,6 +10,7 @@ import Registration from './Pages/Login/Registration/Registration';
 import Home from './Pages/Home/Home';
 import Faq from './Pages/Faq/Faq';
 import PrivateRoute from './Routes/Routes/PrivateRoute';
+import ErrorPage from './Pages/Error/ErrorPage';
 // import { routes } from './Routes/Routes/Routes';
 
 
@@ -18,6 +19,7 @@ function App() {
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",

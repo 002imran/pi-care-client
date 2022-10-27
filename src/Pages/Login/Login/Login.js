@@ -61,9 +61,10 @@ const Login = () => {
 
 
   return (
-    <div className="d-flex flex-row-reverse m-5">
+    // <div className="d-flex flex-row-reverse m-5">
+    <div className="d-flex flex-column-reverse flex-md-row-reverse m-5 me-sm-5">
       <>
-        <Form className="w-25 m-5" onSubmit={handleSubmit}>
+        <Form className="w-100 me-sm-5" onSubmit={handleSubmit}>
           <h2 className="text-center mb-3 text-primary">
             Log In <SiGnuprivacyguard />
           </h2>
@@ -102,7 +103,9 @@ const Login = () => {
         </Form>
       </>
 
-      <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+      {/* <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"> */}
+      {/* <div className="d-sm-block d-none"> */}
+      <div className="">
         <img
           src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
           className="img-fluid"
