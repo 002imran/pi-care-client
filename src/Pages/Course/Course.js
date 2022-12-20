@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Pdf from "react-to-pdf";
 
 const Course = () => {
     const courseItems = useLoaderData();
@@ -8,7 +9,7 @@ const Course = () => {
     return (
     
       <div className="row row-cols-1 row-cols-md-12 row-cols-lg-12 g-3 pb-3 mt-5 container">
-        <div className="col">
+      <div className="col">
           <div className="card gap-2 me-5">
             <h5 className="card-title text-center my-3 fs-3">{title}</h5>
             <img
@@ -17,13 +18,16 @@ const Course = () => {
               style={{ height: "50vh" }}
               alt="..."
             />
+            
+            
             <div className="card-body">
               {body}
             
             </div>
+           
           </div>
         </div>
-      </div>
+        </div>
     );
 };
 
